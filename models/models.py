@@ -1,3 +1,4 @@
+import json
 import sys 
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),  '..')))
@@ -26,10 +27,10 @@ class User(Base):
     
 
     def __str__(self):
-        return f"User's ID: {self.user_id}, Username: {self.username}, Email: {self.email}, Role ID: {self.role_id}"
+        return f"User's ID: {self.user_id}, Username: {self.username}, Email: {self.email}, Role Type: {self.role}"
 
     def __repr__(self):
-        return f"<User(user_id={self.user_id}, username={self.username}, email={self.email}, role_id={self.role_id})>"
+        return f"A User has an ID = {self.user_id}, a Username = {self.username}, an Email = {self.email} and a Role = {self.role}"
 
 
 
@@ -47,6 +48,22 @@ class Question(Base):
     question_type = Column(Enum(QuestionTypeEnum), nullable=False)
     options = Column(String(500))
 
+    feedback = relationship("Feedback", back_populates="question")
+
+
+    def __str__(self):
+        if self.question_type == QuestionTypeEnum.SELECT:
+            options_list = json.loads(self.options) if self.options else []
+            options_display = ", ".join(options_list)
+            return (
+                f"Question ID: {self.question_id}, Text: '{self.question_text}', "
+                f"Type: SELECT, Options: [{options_display}]"
+            )
+        else:
+            return (
+                f"Question ID: {self.question_id}, Text: '{self.question_text}', "
+                f"Type: TEXT"
+            )
 
 
 
