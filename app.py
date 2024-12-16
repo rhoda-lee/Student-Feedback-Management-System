@@ -26,7 +26,7 @@ app.register_blueprint(feedback_bp)
 
 @app.route('/')
 def home():
-    return {"Message": "Welcome to the Student Feedback Management System"}
+    return f'Welcome to the Student Feedback Management System'
 
 if __name__ == '__main__':
     app.run(debug=True)
