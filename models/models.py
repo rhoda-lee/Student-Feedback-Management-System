@@ -6,6 +6,8 @@ from config.config import session
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy import Column, Integer, String, Enum, ForeignKey, Text
 from enum import Enum as PyEnum
+from flask_login import UserMixin
+from werkzeug.security import check_password_hash
 
 Base = declarative_base()
 
@@ -15,7 +17,7 @@ class RoleType(PyEnum):
     ADMIN = 'admin'
 
 
-class User(Base): 
+class User(Base, UserMixin): 
     __tablename__ = 'users' 
     user_id = Column(Integer, primary_key = True) 
     username = Column(String(50), unique = True, nullable = False) 
@@ -32,8 +34,11 @@ class User(Base):
     def __repr__(self):
         return f"A User has an ID = {self.user_id}, a Username = {self.username}, an Email = {self.email} and a Role = {self.role}"
 
-
-
+    def get_id(self):
+        return str(self.user_id)
+    
+    # def verify_password(self, password):
+    #     return check_password_hash(self.password, password)
 
 '''Questions Table'''
 
