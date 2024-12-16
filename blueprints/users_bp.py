@@ -20,16 +20,16 @@ def register_user():
         password = data.get('password')
 
         if not username or not email or not password:
-            return jsonify({"Error": "Missing required fields: username, email, or password."}), 400
+            return jsonify({"error": "Missing required fields: username, email, or password."}), 400
 
         existing_user = user_crud.get_user_by_email(email)
         if existing_user:
-            return jsonify({"Error": "Email already exists. Please log in."}), 409
+            return jsonify({"error": "Email already exists. Please log in."}), 409
 
         user_crud.add_user(username, email, password)
-        return jsonify({"Message": "Registration successful!"}), 201
+        return jsonify({"message": "Registration successful!"}), 201
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/login', methods=['POST'])
 def login_user_route():
@@ -39,39 +39,40 @@ def login_user_route():
         password = data.get('password')
 
         if not email or not password:
-            return jsonify({"Error": "Missing email or password."}), 400
+            return jsonify({"error": "Missing email or password."}), 400
 
         user = user_crud.get_user_by_email(email)
         if user and check_password_hash(user.password, password):
             login_user(user)
-            return jsonify({"Message": f"Welcome back, {user.username}!"}), 200
+            return jsonify({"message": f"Welcome back, {user.username}!",
+                            "redirect": "stu_dash.html"}), 200
         else:
-            return jsonify({"Error": "Invalid email or password."}), 401
+            return jsonify({"error": "Invalid email or password."}), 401
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/logout', methods=['POST'])
 @login_required
 def logout():
     try:
         logout_user()
-        return jsonify({"Message": "You have been logged out."}), 200
+        return jsonify({"message": "You have been logged out."}), 200
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
     try:
         return jsonify({
-            "Message": "Welcome to your dashboard.",
+            "message": "Welcome to your dashboard.",
             "User": {
                 "username": current_user.username,
                 "email": current_user.email
             }
         }), 200
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/users', methods=['GET'])
 def list_users():
@@ -86,14 +87,14 @@ def list_users():
         
         return jsonify({"Users": user_list}), 200
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     try:
         user = user_crud.get_user_by_id(user_id)
         if not user:
-            return jsonify({"Error": "User not found."}), 404
+            return jsonify({"error": "User not found."}), 404
         return jsonify({
             "id": user.user_id,
             "username": user.username,
@@ -101,7 +102,7 @@ def get_user(user_id):
             "role": user.role.name
         }), 200
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/users/update/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
@@ -114,18 +115,18 @@ def update_user(user_id):
 
         user = user_crud.update_user(user_id, username, email, password, role)
         if not user:
-            return jsonify({"Error": "User not found."}), 404
+            return jsonify({"error": "User not found."}), 404
 
-        return jsonify({"Message": "User updated successfully."}), 200
+        return jsonify({"message": "User updated successfully."}), 200
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
 
 @users_bp.route('/users/delete/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     try:
         user = user_crud.delete_user(user_id)
         if user:
-            return jsonify({"Message": user}), 200
-        return jsonify({"Error": "User not found."}), 404
+            return jsonify({"message": user}), 200
+        return jsonify({"error": "User not found."}), 404
     except Exception as e:
-        return jsonify({"Error": f"An error occurred: {e}"}), 500
+        return jsonify({"error": f"An error occurred: {e}"}), 500
