@@ -1,4 +1,4 @@
-# Student-Feedback-Management-System
+## Final Project - Backend Development
 # 🎓 Student Feedback Management System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -8,32 +8,38 @@
 
 > A web-based platform for collecting and managing student feedback, enabling institutions to make data-driven decisions and improve educational outcomes.
 
+![Header Image](./header-image.jpg)
+
+## Author
+* [Rhoda Oduro-Nyarko](https://github.com/rhoda-lee)
 ---
 
 ## 📋 Table of Contents
 - [🎓 Student Feedback Management System](#-student-feedback-management-system)
-  - [📋 Table of Contents](#-table-of-contents)
-  - [🌟 Project Description](#-project-description)
-  - [🚀 Features](#-features)
-  - [🛠️ Setup and Installation](#️-setup-and-installation)
-  - [🔄 API Endpoints](#-api-endpoints)
-    - [👤 Users API](#-users-api)
-    - [❓ Questions API](#-questions-api)
-    - [💬 Feedback API](#-feedback-api)
-  - [💻 Example Usage](#-example-usage)
-  - [🧑 About Me](#-about-me)
-  - [🔗 Key Projects](#-key-projects)
-  - [📄 License](#-license)
+  - [Table of Contents](#-table-of-contents)
+  - [Project Description](#-project-description)
+  - [Features](#-features)
+  - [Setup and Installation](#️-setup-and-installation)
+  - [API Endpoints](#-api-endpoints)
+    - [Users API](#-users-api)
+    - [Questions API](#-questions-api)
+    - [Feedback API](#-feedback-api)
+  - [Example Usage](#-example-usage)
+  - [About Me](#-about-me)
+  - [Key Projects](#-key-projects)
+  - [License](#-license)
 
 ---
 
-## 🌟 Project Description
+## Project Description
 
-The **Student Feedback Management System** simplifies the process of collecting and managing student feedback. Designed for educational institutions, the system includes role-based access for students and admins. Students submit feedback on curriculum and campus facilities, while admins analyze this feedback via dashboards to make informed decisions.
+The **Student Feedback Management System** simplifies the process of collecting and managing student feedback. 
+Designed for educational institutions, the system includes role-based access for students and admins. 
+Students submit feedback on curriculum and campus facilities, while admins analyze this feedback via dashboards to make informed decisions.
 
 ---
 
-## 🚀 Features
+## Features
 
 - **Role-Based Access**:
   - Students: Submit feedback.
@@ -45,7 +51,7 @@ The **Student Feedback Management System** simplifies the process of collecting 
 
 ---
 
-## 🛠️ Setup and Installation
+## Setup and Installation
 
 ### Prerequisites
 - Python 3.8+
@@ -91,8 +97,10 @@ The **Student Feedback Management System** simplifies the process of collecting 
 ```bash
     http://127.0.0.1:5000
 ```
-## 🔄 API Endpoints
-### 👤 Users API
+
+
+## API Endpoints
+### Users API
 
 | Endpoint                 | Method | Description               | Example Request                                                                                                                                          | Example Response                                                                                                                                                   |
 |--------------------------|--------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -104,7 +112,7 @@ The **Student Feedback Management System** simplifies the process of collecting 
 | `/users/update/<int:user_id>` | PUT   | Update a user         | `{ "username": "john_updated", "email": "john_updated@example.com", "password": "newpassword123", "role": "user" }`                                       | `{ "message": "User updated successfully." }`                                                                                                                     |
 | `/users/delete/<int:user_id>` | DELETE | Delete a user        | -                                                                                                                                                        | `{ "message": "User deleted successfully." }`                                                                                                                     |
 
-### ❓ Questions API
+### Questions API
 
 | Endpoint                 | Method | Description               | Example Request                                                                                                                                          | Example Response                                                                                                                                                   |
 |--------------------------|--------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -114,7 +122,7 @@ The **Student Feedback Management System** simplifies the process of collecting 
 | `/questions/update/<int:question_id>` | PUT | Update a question | `{ "question_text": "What is your favorite fruit?", "question_type": "select", "options": ["Apple", "Banana", "Cherry"] }`                                | `{ "Message": "Question updated successfully." }`                                                                                                                  |
 | `/questions/delete/<int:question_id>` | DELETE | Delete a question | -                                                                                                                                                        | `{ "Message": "Question deleted successfully." }`                                                                                                                  |
 
-### 💬 Feedback API
+### Feedback API
 
 | Endpoint                 | Method | Description               | Example Request                                                                                                                                          | Example Response                                                                                                                                                   |
 |--------------------------|--------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -126,7 +134,7 @@ The **Student Feedback Management System** simplifies the process of collecting 
 
 
 
-## 💻 Example Usage
+## Example Usage
 ### Testing API Endpoints with Postman
     To test the backend API endpoints using Postman, follow these steps:
 
@@ -391,34 +399,43 @@ The **Student Feedback Management System** simplifies the process of collecting 
 - Open Postman.
 - Create a new request and set the appropriate method (e.g., POST, GET, PUT, or DELETE).
 - Enter the endpoint URL (e.g., http://127.0.0.1:5000/register).
-- For endpoints that require data (e.g., POST), go to the Body tab, select raw, choose JSON format, and input the JSON data.
-- Click Send and verify the response matches the expected output.
+- For endpoints that require data (e.g., POST):
+  - Go to the Body tab
+  -Select raw
+  - Choose JSON format
+  - Input the JSON data
+- Click Send and verify that the response matches the expected output.
 
 
 
+## About Me
+Hi 👋, I'm Rhoda Lee, a passionate software developer and data science enthusiast. 
+I love creating solutions that solve real-world problems and enjoy contributing to open-source projects.
 
 
+### What I Do:
+- **Web Development**: 
+    - Full-stack expertise with Python, Flask, and React
+
+- **Data Science and Analytics**: 
+    - Working on projects that analyze and visualize data insights
+
+- **Tech Advocacy**: 
+    - Committed to sharing knowledge and empowering others through workshops and online content
 
 
+### Key Projects
+#### ATM Simulation: 
+  * A showcase of properties available for rent or sale in Accra
 
-## 🧑 About Me
-👋 Hi, I'm Rhoda Lee, a passionate software developer and data science enthusiast. I love creating solutions that solve real-world problems and enjoy contributing to open-source projects.
+#### CPU Scheduling Algorithm: 
+  * Tutorials and insights into the world of data analysis and visualization
 
-### 🔍 What I Do:
-- Web Development: 
-    - Full-stack expertise with Python, Flask, and React.
-- Data Science: 
-    - Working on projects that analyze and visualize data insights.
-Tech Advocacy: 
-    - Committed to sharing knowledge and empowering others through workshops and online content.
 
-### 🔗 Key Projects
-#### Real Estate Tour Website: A showcase of properties available for rent or sale in Accra.
-Data Analysis YouTube Channel: Tutorials and insights into the world of data analysis and visualization.
-📄 License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-Feel free to fork, contribute, or reach out to collaborate! 😊
+Feel free to fork, contribute or reach out to collaborate! 😊
 
 
 
