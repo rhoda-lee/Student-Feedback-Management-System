@@ -44,8 +44,7 @@ def login_user_route():
         user = user_crud.get_user_by_email(email)
         if user and check_password_hash(user.password, password):
             login_user(user)
-            return jsonify({"message": f"Welcome back, {user.username}!",
-                            "redirect": "stu_dash.html"}), 200
+            return jsonify({"message": f"Welcome back, {user.username}!"}), 200
         else:
             return jsonify({"error": "Invalid email or password."}), 401
     except Exception as e:
@@ -64,13 +63,36 @@ def logout():
 @login_required
 def dashboard():
     try:
-        return jsonify({
-            "message": "Welcome to your dashboard.",
-            "User": {
-                "username": current_user.username,
-                "email": current_user.email
-            }
-        }), 200
+        if current_user.role == RoleType.ADMIN:
+            return jsonify({
+                "message": "Welcome to the Admin Dashboard.",
+                "AdminPanel": {
+                    "username": current_user.username,
+                    "email": current_user.email,
+                    "admin_tools": [
+                        "User Management",
+                        "Feedback Reports",
+                        "System Logs"
+                    ]
+                }
+            }), 200
+        
+        elif current_user.role == RoleType.USER:
+            return jsonify({
+                "message": "Welcome to the Student Dashboard.",
+                "StudentPanel": {
+                    "username": current_user.username,
+                    "email": current_user.email,
+                    "student_tools": [
+                        "Submit Feedback",
+                        "View Submitted Feedback"
+                    ]
+                }
+            }), 200
+        
+        else:
+            return jsonify({"error": "Unauthorized role access."}), 403
+
     except Exception as e:
         return jsonify({"error": f"An error occurred: {e}"}), 500
 
